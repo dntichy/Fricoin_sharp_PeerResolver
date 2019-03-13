@@ -9,7 +9,7 @@ namespace FricoinPeerResolver
     class Program
     {
 
-        private static P2PServerPeerResolver mRepositoryServer;
+        private static P2PServerPeerResolver _mRepositoryServer;
         static void Main(string[] args)
         {
             String hostName = System.Net.Dns.GetHostName();
@@ -20,16 +20,16 @@ namespace FricoinPeerResolver
                     Console.WriteLine(hostEntry.AddressList[i].ToString());
             }
 
-
+            
             try
             {
-                mRepositoryServer = new P2PServerPeerResolver(46800);
+                _mRepositoryServer = new P2PServerPeerResolver(46800);
       
             }
             catch (Exception ex)
             {
                 
-                mRepositoryServer = null;
+                _mRepositoryServer = null;
                 
             }
 

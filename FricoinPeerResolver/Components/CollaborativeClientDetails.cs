@@ -27,6 +27,12 @@ namespace FricoinPeerResolver.Components
             set { mClientListenPort = value; }
         }
 
+        public int CompareTo(ICollaborativeClientDetails other)
+        {
+            if (Equals(other)) return 0;
+            else return 1;
+        }
+
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -35,9 +41,8 @@ namespace FricoinPeerResolver.Components
             if (GetType() != obj.GetType())
                 return false;
 
-            return (mClientListenPort == ((CollaborativeClientDetails) obj).ClientListenPort &&
-                    mClientIPAddress == ((CollaborativeClientDetails) obj).ClientIPAddress &&
-                    mClientName == ((CollaborativeClientDetails) obj).ClientName); //base.Equals(obj);
+            return (mClientListenPort == ((ICollaborativeClientDetails)obj).ClientListenPort &&
+                    mClientIPAddress.Equals(((ICollaborativeClientDetails)obj).ClientIPAddress)); 
         }
 
         public override int GetHashCode()

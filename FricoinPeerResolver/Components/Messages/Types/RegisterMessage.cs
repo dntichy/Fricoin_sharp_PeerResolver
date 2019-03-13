@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Text;
 using System.Xml;
-using Engine.Network;
+using FricoinPeerResolver.Components.Enums;
 using FricoinPeerResolver.Components.Interfaces;
 
-namespace FricoinPeerResolver.Components.Messages
+
+namespace FricoinPeerResolver.Components.Messages.Types
 {
     public class RegisterMessage : IRegisterMessage
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using FricoinPeerResolver.Components.Interfaces;
 
-namespace FricoinPeerResolver.Components
+namespace FricoinPeerResolver.Components.Events
 {
     public class ServerRegisterEventArgs : EventArgs
     {

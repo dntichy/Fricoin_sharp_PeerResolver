@@ -33,22 +33,21 @@ namespace FricoinPeerResolver
         private Socket mListenerSocket;
 
         private ServerStates mServerState;
-
         public ServerStates ServerState
         {
             get { return mServerState; }
         }
 
-        private event ServerRegisterEvent mOnRegisterClient;
 
+
+        private event ServerRegisterEvent mOnRegisterClient;
         public event ServerRegisterEvent OnRegisterClient
         {
             add { mOnRegisterClient += value; }
             remove { mOnRegisterClient -= value; }
         }
 
-        private int mListenPort;
-
+        private int mListenPort;    
         public int ListenPort
         {
             get { return mListenPort; }
@@ -56,7 +55,6 @@ namespace FricoinPeerResolver
         }
 
         private IMessageParserEngine mMessageParser;
-
         public IMessageParserEngine MessageParser
         {
             get { return mMessageParser; }
@@ -70,10 +68,6 @@ namespace FricoinPeerResolver
             mMessageParser = new MessageParserEngineClass();
             Initialize();
         }
-
-        //////////////////////////////////////////////////////////////////////////
-        // Class Methods
-        //////////////////////////////////////////////////////////////////////////
 
         public void StopServer()
         {
@@ -166,6 +160,7 @@ namespace FricoinPeerResolver
             return InitState.InitOK;
         }
 
+        //todo
         protected void RegisterClient(String group, ICollaborativeClientDetails client)
         {
             if (!mClientDetailsGroups.ContainsKey(group))
@@ -279,12 +274,16 @@ namespace FricoinPeerResolver
                     }
                     case ((int) MessageType.UnregisterMessage):
                     {
+                            
                         mClientDetailsGroups[((UnregisterMessage) rxMessage).Group]
                             .Remove(((UnregisterMessage) rxMessage).Client);
                         //do not contact all others in the same group... have the client take care of that
                         if (mOnRegisterClient != null)
                             mOnRegisterClient.Invoke(this,
                                 new ServerRegisterEventArgs(((UnregisterMessage) rxMessage).Client));
+
+
+                        Console.WriteLine("Client "+ ((UnregisterMessage)rxMessage).Client.ClientIPAddress+ ((UnregisterMessage)rxMessage).Client.ClientListenPort + " unregistered");
                         break;
                     }
                 }

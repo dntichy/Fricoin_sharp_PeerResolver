@@ -1,5 +1,5 @@
-﻿using Engine.Network;
-using FricoinPeerResolver.Components.Enums;
+﻿using FricoinPeerResolver.Components.Enums;
+using FricoinPeerResolver.Components.Events;
 
 namespace FricoinPeerResolver.Components.Interfaces
 {

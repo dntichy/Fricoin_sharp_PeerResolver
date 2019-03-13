@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Engine.Network.MessageParser.Messages;
 using FricoinPeerResolver.Components.Enums;
 using FricoinPeerResolver.Components.Interfaces;
+using FricoinPeerResolver.Components.Messages.Types;
 
 namespace FricoinPeerResolver.Components.Messages
 {

@@ -1,7 +1,7 @@
 ﻿using System;
 using FricoinPeerResolver.Components.Interfaces;
 
-namespace FricoinPeerResolver.Components.Messages
+namespace FricoinPeerResolver.Components.Events
 {
     public class CollaborativeNotesReceiveMessageEventArgs : EventArgs
     {

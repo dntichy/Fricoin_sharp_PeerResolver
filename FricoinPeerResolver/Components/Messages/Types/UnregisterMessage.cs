@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Text;
 using System.Xml;
-using FricoinPeerResolver.Components;
 using FricoinPeerResolver.Components.Interfaces;
 
-namespace Engine.Network.MessageParser.Messages
+namespace FricoinPeerResolver.Components.Messages.Types
 {
     public class UnregisterMessage : IRegisterMessage
     {
@@ -24,7 +23,7 @@ namespace Engine.Network.MessageParser.Messages
 
         public /*MessageType*/int Type
         {
-            get { return (int)MessageType.UnregisterMessage; }
+            get { return (int)FricoinPeerResolver.Components.Enums.MessageType.UnregisterMessage; }
         }
 
         public Byte[] GetMessagePacket()
@@ -63,7 +62,7 @@ namespace Engine.Network.MessageParser.Messages
                 return false;
             }
 
-            MessageType type = MessageType.EmptyMessage;
+            FricoinPeerResolver.Components.Enums.MessageType type = FricoinPeerResolver.Components.Enums.MessageType.EmptyMessage;
 
             XmlElement messageElement = xmlDoc.DocumentElement;
             if (messageElement.Name == "message")
@@ -72,13 +71,13 @@ namespace Engine.Network.MessageParser.Messages
                 {
                     if (node.Name == "type")
                     {
-                        type = (MessageType)Enum.Parse(typeof(MessageType), node.InnerText);
+                        type = (FricoinPeerResolver.Components.Enums.MessageType)Enum.Parse(typeof(FricoinPeerResolver.Components.Enums.MessageType), node.InnerText);
                         break;
                     }
                 }
             }
 
-            if (type != MessageType.UnregisterMessage)
+            if (type != FricoinPeerResolver.Components.Enums.MessageType.UnregisterMessage)
             {
                 System.Diagnostics.Debug.WriteLine("The supplied data was the wrong message type!");
                 return false;
@@ -122,7 +121,11 @@ namespace Engine.Network.MessageParser.Messages
 
         public IMessage Clone()
         {
-            throw new NotImplementedException();
+            var clone = new UnregisterMessage();
+            clone.Group = Group;
+            clone.Client = Client;
+
+            return clone;
         }
     }
 }

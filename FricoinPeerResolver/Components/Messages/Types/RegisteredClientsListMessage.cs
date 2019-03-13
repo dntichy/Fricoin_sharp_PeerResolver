@@ -2,10 +2,10 @@
 using System.Collections.ObjectModel;
 using System.Text;
 using System.Xml;
-using Engine.Network;
 using FricoinPeerResolver.Components.Interfaces;
+using MessageType = FricoinPeerResolver.Components.Enums.MessageType;
 
-namespace FricoinPeerResolver.Components.Messages
+namespace FricoinPeerResolver.Components.Messages.Types
 {
     public class RegisteredClientsListMessage : IMessage
     {
