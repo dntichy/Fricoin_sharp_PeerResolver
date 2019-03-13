@@ -229,14 +229,11 @@ namespace FricoinPeerResolver
                     case ((int) MessageType.RegisterMessage):
                     {
                         if (!mClientDetailsGroups.ContainsKey(((RegisterMessage) rxMessage).Group))
-                            mClientDetailsGroups[((RegisterMessage) rxMessage).Group] =
-                                new Collection<ICollaborativeClientDetails>();
+                            mClientDetailsGroups[((RegisterMessage) rxMessage).Group] = new Collection<ICollaborativeClientDetails>();
 
 
-                        if (mClientDetailsGroups[((RegisterMessage) rxMessage).Group]
-                                .IndexOf(((RegisterMessage) rxMessage).Client) >= 0)
-                            mClientDetailsGroups[((RegisterMessage) rxMessage).Group]
-                                .Remove(((RegisterMessage) rxMessage).Client);
+                        if (mClientDetailsGroups[((RegisterMessage) rxMessage).Group].IndexOf(((RegisterMessage) rxMessage).Client) >= 0)
+                            mClientDetailsGroups[((RegisterMessage) rxMessage).Group].Remove(((RegisterMessage) rxMessage).Client);
 
                         //Socket workerSocket = (Socket)dataStatus.mCurrentSocket;
                         //respond with the current group in the message
@@ -246,11 +243,9 @@ namespace FricoinPeerResolver
                         response.Group = ((RegisterMessage) rxMessage).Group;
 
                         //create a socket connection to the newly added client listener port
-                        Socket clientSocket =
-                            new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                        Socket clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
                         IPAddress remoteMachine = IPAddress.Parse(((RegisterMessage) rxMessage).Client.ClientIPAddress);
-                        IPEndPoint remoteEndpoint = new IPEndPoint(remoteMachine,
-                            ((RegisterMessage) rxMessage).Client.ClientListenPort);
+                        IPEndPoint remoteEndpoint = new IPEndPoint(remoteMachine,((RegisterMessage) rxMessage).Client.ClientListenPort);
                         clientSocket.Connect(remoteEndpoint);
 
                         if (clientSocket.Connected)
@@ -264,12 +259,10 @@ namespace FricoinPeerResolver
                         clientSocket.Close(1); //just a minor timeout to be sure the message got there
                         //the socket just lost the purpose of ever existing
 
-                        mClientDetailsGroups[((RegisterMessage) rxMessage).Group]
-                            .Add(((RegisterMessage) rxMessage).Client);
+                        mClientDetailsGroups[((RegisterMessage) rxMessage).Group].Add(((RegisterMessage) rxMessage).Client);
 
                         if (mOnRegisterClient != null)
-                            mOnRegisterClient.Invoke(this,
-                                new ServerRegisterEventArgs(((RegisterMessage) rxMessage).Client));
+                            mOnRegisterClient.Invoke(this, new ServerRegisterEventArgs(((RegisterMessage) rxMessage).Client));
                         break;
                     }
                     case ((int) MessageType.UnregisterMessage):
